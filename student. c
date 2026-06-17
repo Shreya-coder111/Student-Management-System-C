@@ -1,0 +1,180 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX 100
+#define FILENAME "students.dat"
+
+struct Student {
+    int roll;
+    char name[50];
+    float marks;
+};
+
+struct Student students[MAX];
+int count = 0;
+
+// Function declarations
+void addStudent();
+void displayStudents();
+void searchStudent();
+void deleteStudent();
+void updateMarks(); // Feature 2
+void sortStudents(); // Feature 3
+void saveToFile(); // Feature 1
+void loadFromFile(); // Feature 1
+
+int main() {
+    int choice;
+    loadFromFile(); // Program શરૂ થાય ત્યારે File માંથી Data લોડ કરવાનો
+
+    printf("===== Student Management System =====\n");
+
+    while(1) {
+        printf("\n1. Add Student\n");
+        printf("2. Display All Students\n");
+        printf("3. Search Student by Roll No\n");
+        printf("4. Delete Student\n");
+        printf("5. Update Marks\n");
+        printf("6. Sort by Marks - Topper\n");
+        printf("7. Save & Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch(choice) {
+            case 1: addStudent(); break;
+            case 2: displayStudents(); break;
+            case 3: searchStudent(); break;
+            case 4: deleteStudent(); break;
+            case 5: updateMarks(); break;
+            case 6: sortStudents(); break;
+            case 7:
+                saveToFile(); // Exit પહેલા Save કરવાનો
+                printf("Data Saved! Exiting... Bye Shreya!\n");
+                return 0;
+            default:
+                printf("Invalid choice! Try again.\n");
+        }
+    }
+    return 0;
+}
+
+void addStudent() {
+    if(count >= MAX) {
+        printf("Database full!\n");
+        return;
+    }
+    printf("\nEnter Roll No: ");
+    scanf("%d", &students[count].roll);
+    printf("Enter Name: ");
+    scanf(" %[^\n]", students[count].name);
+    printf("Enter Marks: ");
+    scanf("%f", &students[count].marks);
+    count++;
+    printf("Student Added Successfully! ✅\n");
+}
+
+void displayStudents() {
+    if(count == 0) {
+        printf("\nNo students in database.\n");
+        return;
+    }
+    printf("\n%-10s %-20s %-10s\n", "Roll No", "Name", "Marks");
+    printf("-------------------------------------\n");
+    for(int i = 0; i < count; i++) {
+        printf("%-10d %-20s %-10.2f\n",
+               students[i].roll, students[i].name, students[i].marks);
+    }
+}
+
+void searchStudent() {
+    int roll, found = 0;
+    printf("\nEnter Roll No to search: ");
+    scanf("%d", &roll);
+    for(int i = 0; i < count; i++) {
+        if(students[i].roll == roll) {
+            printf("\nStudent Found:\nRoll No: %d\nName: %s\nMarks: %.2f\n",
+                   students[i].roll, students[i].name, students[i].marks);
+            found = 1;
+            break;
+        }
+    }
+    if(!found) printf("Student not found! ❌\n");
+}
+
+void deleteStudent() {
+    int roll, found = 0;
+    printf("\nEnter Roll No to delete: ");
+    scanf("%d", &roll);
+    for(int i = 0; i < count; i++) {
+        if(students[i].roll == roll) {
+            for(int j = i; j < count-1; j++) {
+                students[j] = students[j+1];
+            }
+            count--;
+            printf("Student Deleted Successfully! 🗑️\n");
+            found = 1;
+            break;
+        }
+    }
+    if(!found) printf("Student not found! ❌\n");
+}
+
+// Feature 2: Update Marks
+void updateMarks() {
+    int roll;
+    float newMarks;
+    printf("\nEnter Roll No to update marks: ");
+    scanf("%d", &roll);
+    for(int i = 0; i < count; i++) {
+        if(students[i].roll == roll) {
+            printf("Current Marks: %.2f\n", students[i].marks);
+            printf("Enter New Marks: ");
+            scanf("%f", &newMarks);
+            students[i].marks = newMarks;
+            printf("Marks Updated! ✅\n");
+            return;
+        }
+    }
+    printf("Student not found! ❌\n");
+}
+
+// Feature 3: Sort by Marks - Bubble Sort
+void sortStudents() {
+    for(int i = 0; i < count-1; i++) {
+        for(int j = 0; j < count-i-1; j++) {
+            if(students[j].marks < students[j+1].marks) {
+                struct Student temp = students[j];
+                students[j] = students[j+1];
+                students[j+1] = temp;
+            }
+        }
+    }
+    printf("Sorted by Marks - Topper on Top! 🏆\n");
+    displayStudents();
+}
+
+// Feature 1: File માં Save કરવાનું
+void saveToFile() {
+    FILE *fp = fopen(FILENAME, "wb");
+    if(fp == NULL) {
+        printf("Error saving file!\n");
+        return;
+    }
+    fwrite(&count, sizeof(int), 1, fp);
+    fwrite(students, sizeof(struct Student), count, fp);
+    fclose(fp);
+    printf("Data saved to %s ✅\n", FILENAME);
+}
+
+// Feature 1: File માંથી Load કરવાનું
+void loadFromFile() {
+    FILE *fp = fopen(FILENAME, "rb");
+    if(fp == NULL) {
+        count = 0; // File નથી તો નવું શરૂ કરવાનું
+        return;
+    }
+    fread(&count, sizeof(int), 1, fp);
+    fread(students, sizeof(struct Student), count, fp);
+    fclose(fp);
+    printf("Loaded %d students from file ✅\n", count);
+}
