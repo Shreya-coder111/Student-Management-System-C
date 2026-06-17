@@ -19,4 +19,4 @@ Menu-driven Program
 1. Compile: `gcc student.c -o student.exe`
 2. Run: `./student.exe`
 
-Built by Shreya Patel
+Built by Shreya Prajapati
