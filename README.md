@@ -1,22 +1,27 @@
-# Student Management System - C Language
+# Student Management System in C 📚
 
-A console-based student database system built as my first C project.
+A complete console-based Student Management System built using C language with file handling.
 
-## Features
-- Add, Display, Search, Delete Students
-- Update Student Marks  
-- Sort by Marks to find Topper
-- Save/Load Data using File Handling
+## ✨ Features
+- ➕ Add New Student Records
+- 🔍 Search Student by Roll No
+- ✏️ Update Student Details  
+- 🗑️ Delete Student Record
+- 📋 View All Students
+- 📊 Sort Students by Name/Roll No
 
-## Concepts Used
-Structure, 
-Arrays, 
-Functions, 
-File I/O, 
-Menu-driven Program
+## 🛠️ Tech Stack
+**Language:** C  
+**Concepts Used:** File Handling, Structures, Functions, Arrays
 
-## How to Run
-1. Compile: `gcc student.c -o student.exe`
-2. Run: `./student.exe`
+## 🚀 How to Run
+1. Clone the repository
+2. Open `student.c` in Code::Blocks / Dev-C++ / GCC Compiler
+3. Compile and Run the program
 
-Built by Shreya Prajapati
+## 📸 Screenshot
+
+![Student Management System Output](screenshot.png)
+
+---
+⭐ Made by Shreya as my first C Project
