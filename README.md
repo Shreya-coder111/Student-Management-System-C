@@ -15,9 +15,9 @@ A complete console-based Student Management System built using C language with f
 **Concepts Used:** File Handling, Structures, Functions, Arrays
 
 ## 🚀 How to Run
-1. Clone the repository
-2. Open `student.c` in Code::Blocks / Dev-C++ / GCC Compiler
-3. Compile and Run the program
+1. save as student. c
+2. compile:gcc student.c -o student.exe
+3. run:./student.exe
 
 ## 📸 Screenshot
 
