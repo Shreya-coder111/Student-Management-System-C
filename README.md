@@ -21,7 +21,7 @@ A complete console-based Student Management System built using C language with f
 
 ## 📸 Screenshot
 
-![Student Management System Output](https://files.catbox.moe/abc123.png)
+![Student Management System Output](https://files.catbox.moe/l3wrl1.jpg) 
 
 ---
 ⭐ Made by Shreya as my first C Project
