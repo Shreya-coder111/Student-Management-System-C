@@ -9,11 +9,11 @@ A console-based student database system built as my first C project.
 - Save/Load Data using File Handling
 
 ## Concepts Used
--Structure
--Arrays
--Functions
--File I/O
--Menu-driven Program
+Structure, 
+Arrays, 
+Functions, 
+File I/O, 
+Menu-driven Program
 
 ## How to Run
 1. Compile: `gcc student.c -o student.exe`
